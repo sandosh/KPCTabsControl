@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0CCC758522E089A100C0CCF4 /* tab_close_icon.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 0CCC758422E089A100C0CCF4 /* tab_close_icon.pdf */; };
 		5004722A1D5350120095FCCB /* SequenceType+TabsControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500472291D5350120095FCCB /* SequenceType+TabsControl.swift */; };
 		501FD7771D5B2A0100C3B1F3 /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501FD7761D5B2A0100C3B1F3 /* Style.swift */; };
 		501FD7791D5B2CA300C3B1F3 /* DefaultTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501FD7781D5B2CA300C3B1F3 /* DefaultTheme.swift */; };
@@ -76,6 +77,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0CCC758422E089A100C0CCF4 /* tab_close_icon.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = tab_close_icon.pdf; sourceTree = "<group>"; };
 		500472291D5350120095FCCB /* SequenceType+TabsControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "SequenceType+TabsControl.swift"; path = "KPCTabsControl/SequenceType+TabsControl.swift"; sourceTree = "<group>"; };
 		501FD7761D5B2A0100C3B1F3 /* Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Style.swift; path = KPCTabsControl/Style.swift; sourceTree = "<group>"; };
 		501FD7781D5B2CA300C3B1F3 /* DefaultTheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DefaultTheme.swift; path = KPCTabsControl/DefaultTheme.swift; sourceTree = "<group>"; };
@@ -220,6 +222,7 @@
 		9F3C2E2C1A0181A900281F4B /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				0CCC758422E089A100C0CCF4 /* tab_close_icon.pdf */,
 				9F3C2E351A0182DF00281F4B /* KPCPullDownTemplate.pdf */,
 				9F3C2E361A0182DF00281F4B /* KPCTabLeftTemplate.pdf */,
 				9F3C2E371A0182DF00281F4B /* KPCTabPlusTemplate.pdf */,
@@ -410,6 +413,7 @@
 			files = (
 				9FA7EDD01AD66A250060FF79 /* KPCTabPlusTemplate.pdf in Resources */,
 				9FA7EDCF1AD66A250060FF79 /* KPCTabLeftTemplate.pdf in Resources */,
+				0CCC758522E089A100C0CCF4 /* tab_close_icon.pdf in Resources */,
 				9FA7EDD11AD66A250060FF79 /* KPCTabRightTemplate.pdf in Resources */,
 				9FA7EDCE1AD66A250060FF79 /* KPCPullDownTemplate.pdf in Resources */,
 			);

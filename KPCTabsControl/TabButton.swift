@@ -13,6 +13,7 @@ open class TabButton: NSButton {
     fileprivate var iconView: NSImageView?
     fileprivate var alternativeTitleIconView: NSImageView?
     fileprivate var trackingArea: NSTrackingArea?
+    fileprivate var closeButton: NSButton?
     
     fileprivate var tabButtonCell: TabButtonCell? {
         get { return self.cell as? TabButtonCell }
@@ -78,6 +79,32 @@ open class TabButton: NSButton {
             self.needsDisplay = true
         }
     }
+    
+    open var showCloseButton : Bool = false {
+        didSet {
+            if !self.showCloseButton {
+                closeButton?.removeFromSuperview()
+                closeTabCallBack = {_ in }
+                return
+            }
+            self.closeButton = NSButton()
+            self.closeButton?.isBordered = false
+            let path = Bundle(for: TabButton.self).pathForImageResource("tab_close_icon")!
+            closeButton?.image = NSImage(contentsOfFile: path)
+            closeButton?.imageScaling = .scaleProportionallyDown
+            self.addSubview(closeButton!)
+            closeButton?.translatesAutoresizingMaskIntoConstraints = false
+            closeButton?.topAnchor.constraint(equalTo: self.topAnchor, constant: 5).isActive = true
+            closeButton?.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -5).isActive = true
+            closeButton?.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -3).isActive = true
+            closeButton?.heightAnchor.constraint(equalTo: closeButton!.widthAnchor, multiplier: 1).isActive = true
+            
+            closeButton?.target = self
+            closeButton?.action = #selector(closeButtonPressed)
+        }
+    }
+    
+    open var closeTabCallBack : ((AnyObject?) -> Void)? = {_ in }
     
     // MARK: - Init
 
@@ -219,5 +246,11 @@ open class TabButton: NSButton {
     
     internal func finishEditing(fieldEditor: NSText, newValue: String) {
         self.tabButtonCell?.finishEditing(fieldEditor: fieldEditor, newValue: newValue)
+    }
+    
+    //MARK: Closing
+    
+    @objc fileprivate func closeButtonPressed(){
+        closeTabCallBack!(item)
     }
 }
