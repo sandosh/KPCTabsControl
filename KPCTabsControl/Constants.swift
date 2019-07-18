@@ -11,6 +11,9 @@ import Foundation
 /// The name of the notification upon the selection of a new tab.
 public let TabsControlSelectionDidChangeNotification = "TabsControlSelectionDidChangeNotification"
 
+/// The name of the notification upon the tab was closed.
+public let TabsControlTabWillCloseNotification = "TabsControlTabWillCloseNotification"
+
 /**
  The position of a tab button inside the control. Used in the Style.
  

@@ -385,15 +385,26 @@ open class TabsControl: NSControl, NSTextDelegate {
     }
     
     // MARK: - Selection
+    
+    func closeTab(_ item: AnyObject?){
+        NotificationCenter.default.post(name: Notification.Name(rawValue: TabsControlTabWillCloseNotification), object: self)
+        self.delegate?.tabsControlWillCloseTab?(self, item: item!)
+        self.reloadTabs()
+        self.selectTab(self.tabButtons.first)
+    }
 
     @objc fileprivate func selectTab(_ sender: AnyObject?) {
         guard let button = sender as? TabButton
             , button.isEnabled
             else { return }
-
+        
+        self.selectedButton?.showCloseButton = false
+        
         self.selectedButtonIndex = button.index
         self.invalidateRestorableState()
-
+        
+        self.selectedButton?.showCloseButton = true
+        self.selectedButton?.closeTabCallBack = {self.closeTab($0)}
         if let action = self.action,
             let target = self.target {
             NSApp.sendAction(action, to: target, from: self)
