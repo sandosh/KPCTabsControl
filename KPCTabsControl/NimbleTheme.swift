@@ -17,24 +17,34 @@ public struct NimbleTheme: Theme {
     public let unselectableTabButtonTheme: TabButtonTheme = UnselectableTabButtonTheme(base: DefaultTabButtonTheme())
     public let tabsControlTheme: TabsControlTheme = DefaultTabsControlTheme()
     
-    fileprivate static var sharedBorderColor: NSColor { return NSColor.lightGray }
-    fileprivate static var sharedBackgroundColor: NSColor { return NSColor(calibratedWhite: 0.95, alpha: 1.0) }
+    fileprivate static var sharedBorderColor: NSColor { if #available(OSX 10.14, *) {
+        return NSColor.separatorColor
+    } else {
+        return NSColor.lightGray
+        } }
+    fileprivate static var sharedBackgroundColor: NSColor { return NSColor.windowBackgroundColor }
     
     fileprivate struct DefaultTabButtonTheme: KPCTabsControl.TabButtonTheme {
         var backgroundColor: NSColor { return NimbleTheme.sharedBackgroundColor }
         var borderColor: NSColor { return NimbleTheme.sharedBorderColor }
-        var titleColor: NSColor { return NSColor.darkGray }
-        var titleFont: NSFont { return NSFont.systemFont(ofSize: 13) }
+        var titleColor: NSColor { return NSColor.textColor }
+        var titleFont: NSFont { return NSFont.systemFont(ofSize: 12) }
     }
     
     fileprivate struct SelectedTabButtonTheme: KPCTabsControl.TabButtonTheme {
         let base: DefaultTabButtonTheme
-        let blueColor = NSColor(calibratedRed: 205.0/255.0, green: 222.0/255.0, blue: 244.0/255.0, alpha: 1.0)
         
-        var backgroundColor: NSColor { return blueColor }
-        var borderColor: NSColor { return blueColor.darkerColor() }
-        var titleColor: NSColor { return NSColor(calibratedRed: 85.0/255.0, green: 102.0/255.0, blue: 124.0/255.0, alpha: 1.0) }
-        var titleFont: NSFont { return NSFont.boldSystemFont(ofSize: 13) }
+        var backgroundColor: NSColor {
+            if #available(OSX 10.13, *) {
+                return NSColor.init(named: "SelectedBackgroundColor", bundle: Bundle.init(for: TabsControl.self)) ?? NSColor.white
+            } else {
+                return NSColor.white
+            }
+            
+        }
+        var borderColor: NSColor { return NimbleTheme.sharedBorderColor }
+        var titleColor: NSColor { return NSColor.selectedTextColor  }
+        var titleFont: NSFont { return NSFont.systemFont(ofSize: 12) }
     }
     
     fileprivate struct UnselectableTabButtonTheme: KPCTabsControl.TabButtonTheme {
@@ -42,7 +52,7 @@ public struct NimbleTheme: Theme {
         
         var backgroundColor: NSColor { return base.backgroundColor }
         var borderColor: NSColor { return base.borderColor }
-        var titleColor: NSColor { return NSColor.lightGray }
+        var titleColor: NSColor { return base.titleColor }
         var titleFont: NSFont { return base.titleFont }
     }
     
@@ -51,4 +61,3 @@ public struct NimbleTheme: Theme {
         var borderColor: NSColor { return NimbleTheme.sharedBorderColor }
     }
 }
-

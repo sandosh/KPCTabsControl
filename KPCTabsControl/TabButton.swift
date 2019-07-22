@@ -25,7 +25,13 @@ open class TabButton: NSButton {
     }
 
     open var style: Style! {
-        didSet { self.tabButtonCell?.style = self.style }
+        didSet {
+            self.tabButtonCell?.style = self.style
+            let path = Bundle(for: TabButton.self).pathForImageResource("tab_close_icon")!
+            let img = NSImage(contentsOfFile: path)?.imageWithTint((style as! ThemedStyle).theme.closeButtonColor)
+            closeButton?.image = img
+            closeButton?.imageScaling = .scaleProportionallyDown
+        }
     }
 
     /// The button is aware of its last known index in the tab bar.
@@ -84,7 +90,7 @@ open class TabButton: NSButton {
         }
     }
     
-    open var closeTabCallBack : ((AnyObject?) -> Void)? = {_ in }
+    open var closeTabCallBack : ((AnyObject?, AnyObject?) -> Void)? = {_, _ in }
     
     // MARK: - Init
 
@@ -94,7 +100,7 @@ open class TabButton: NSButton {
         
     }
     
-    convenience init(frame frameRect: NSRect, closeCallBack:((AnyObject?) -> Void)?) {
+    convenience init(frame frameRect: NSRect, closeCallBack:((AnyObject? ,AnyObject?) -> Void)?) {
         self.init(frame: frameRect)
         self.cell = TabButtonCell(textCell: "")
         createCloseButton(closeCallBack: closeCallBack)
@@ -123,7 +129,7 @@ open class TabButton: NSButton {
         self.cell = tabCell
     }
     
-    convenience init(index: Int, item: AnyObject, target: AnyObject?, action:Selector, style: Style, closeCallBack: ((AnyObject?) -> Void)?) {
+    convenience init(index: Int, item: AnyObject, target: AnyObject?, action:Selector, style: Style, closeCallBack: ((AnyObject?, AnyObject?) -> Void)?) {
         self.init(index: index, item:  item, target:  target, action:  action, style: style)
         createCloseButton(closeCallBack: closeCallBack)
         
@@ -245,18 +251,15 @@ open class TabButton: NSButton {
     //MARK: Closing
     
     @objc fileprivate func closeButtonPressed(){
-        closeTabCallBack!(item)
+        closeTabCallBack!(self, item)
     }
     
-    func createCloseButton(closeCallBack : ((AnyObject?) -> Void)?) {
+    func createCloseButton(closeCallBack : ((AnyObject?, AnyObject?) -> Void)?) {
         guard let callBack = closeCallBack else {
             return
         }
         self.closeButton = NSButton()
         self.closeButton?.isBordered = false
-        let path = Bundle(for: TabButton.self).pathForImageResource("tab_close_icon")!
-        closeButton?.image = NSImage(contentsOfFile: path)
-        closeButton?.imageScaling = .scaleProportionallyDown
         self.addSubview(closeButton!)
         closeButton?.translatesAutoresizingMaskIntoConstraints = false
         closeButton?.topAnchor.constraint(equalTo: self.topAnchor, constant: 5).isActive = true
