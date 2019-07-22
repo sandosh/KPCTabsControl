@@ -35,6 +35,10 @@ open class TabButton: NSButton {
         get { return tabButtonCell?.buttonPosition }
         set { self.tabButtonCell?.buttonPosition = newValue }
     }
+    
+    open var closeButtonSize: CGFloat {
+        return closeButton?.frame.width ?? 0
+    }
 
     open var representedObject: AnyObject? {
         get { return self.tabButtonCell?.representedObject as AnyObject? }
@@ -80,30 +84,6 @@ open class TabButton: NSButton {
         }
     }
     
-    open var showCloseButton : Bool = false {
-        didSet {
-            if !self.showCloseButton {
-                closeButton?.removeFromSuperview()
-                closeTabCallBack = {_ in }
-                return
-            }
-            self.closeButton = NSButton()
-            self.closeButton?.isBordered = false
-            let path = Bundle(for: TabButton.self).pathForImageResource("tab_close_icon")!
-            closeButton?.image = NSImage(contentsOfFile: path)
-            closeButton?.imageScaling = .scaleProportionallyDown
-            self.addSubview(closeButton!)
-            closeButton?.translatesAutoresizingMaskIntoConstraints = false
-            closeButton?.topAnchor.constraint(equalTo: self.topAnchor, constant: 5).isActive = true
-            closeButton?.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -5).isActive = true
-            closeButton?.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -3).isActive = true
-            closeButton?.heightAnchor.constraint(equalTo: closeButton!.widthAnchor, multiplier: 1).isActive = true
-            
-            closeButton?.target = self
-            closeButton?.action = #selector(closeButtonPressed)
-        }
-    }
-    
     open var closeTabCallBack : ((AnyObject?) -> Void)? = {_ in }
     
     // MARK: - Init
@@ -111,6 +91,13 @@ open class TabButton: NSButton {
     override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
         self.cell = TabButtonCell(textCell: "")
+        
+    }
+    
+    convenience init(frame frameRect: NSRect, closeCallBack:((AnyObject?) -> Void)?) {
+        self.init(frame: frameRect)
+        self.cell = TabButtonCell(textCell: "")
+        createCloseButton(closeCallBack: closeCallBack)
     }
     
     required public init?(coder: NSCoder) {
@@ -136,14 +123,21 @@ open class TabButton: NSButton {
         self.cell = tabCell
     }
     
+    convenience init(index: Int, item: AnyObject, target: AnyObject?, action:Selector, style: Style, closeCallBack: ((AnyObject?) -> Void)?) {
+        self.init(index: index, item:  item, target:  target, action:  action, style: style)
+        createCloseButton(closeCallBack: closeCallBack)
+        
+    }
+    
     override open func copy() -> Any {
-        let copy = TabButton(frame: self.frame)
+        let copy = TabButton(frame: self.frame, closeCallBack: self.closeTabCallBack)
         copy.cell = self.cell?.copy() as? NSCell
         copy.icon = self.icon
         copy.style = self.style
         copy.alternativeTitleIcon = self.alternativeTitleIcon
         copy.state = self.state
         copy.index = self.index
+        copy.closeTabCallBack = self.closeTabCallBack
         return copy
     }
         
@@ -252,5 +246,25 @@ open class TabButton: NSButton {
     
     @objc fileprivate func closeButtonPressed(){
         closeTabCallBack!(item)
+    }
+    
+    func createCloseButton(closeCallBack : ((AnyObject?) -> Void)?) {
+        guard let callBack = closeCallBack else {
+            return
+        }
+        self.closeButton = NSButton()
+        self.closeButton?.isBordered = false
+        let path = Bundle(for: TabButton.self).pathForImageResource("tab_close_icon")!
+        closeButton?.image = NSImage(contentsOfFile: path)
+        closeButton?.imageScaling = .scaleProportionallyDown
+        self.addSubview(closeButton!)
+        closeButton?.translatesAutoresizingMaskIntoConstraints = false
+        closeButton?.topAnchor.constraint(equalTo: self.topAnchor, constant: 5).isActive = true
+        closeButton?.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -5).isActive = true
+        closeButton?.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -3).isActive = true
+        closeButton?.heightAnchor.constraint(equalTo: closeButton!.widthAnchor, multiplier: 1).isActive = true
+        closeButton?.target = self
+        closeTabCallBack = callBack
+        closeButton?.action = #selector(closeButtonPressed)
     }
 }
