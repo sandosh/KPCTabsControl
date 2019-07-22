@@ -93,13 +93,22 @@ import AppKit
     @objc optional func tabsControlDidChangeSelection(_ control: TabsControl, item: AnyObject)
     
     /**
-     *  If implemented, the delegate is informed that the tab did closed.
+     *  If implemented, the delegate is informed that the tab will be closed.
      *  See also TabsControlTabWillCloseNotification
      *
      *  - parameter tabControl: The instance of the tabs control.
      *  - parameter item:       The item representing the selected tab.
      */
     @objc optional func tabsControlWillCloseTab(_ control: TabsControl, item: AnyObject)
+    
+    /**
+     *  If implemented, the delegate is informed that the tab did closed.
+     *  See also TabsControlTabWillCloseNotification
+     *
+     *  - parameter tabControl: The instance of the tabs control.
+     *  - parameter item:       The item representing the selected tab.
+     */
+    @objc optional func tabsControlDidCloseTab(_ control: TabsControl, items: [AnyObject])
 
     /**
      *  Return `true` if the tab is allowed to be reordered (by being dragged with the mouse).
