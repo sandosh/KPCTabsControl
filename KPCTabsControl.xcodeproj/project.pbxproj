@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C0D2B7C22E5E7000047C30F /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0C0D2B7B22E5E7000047C30F /* Colors.xcassets */; };
 		0CCC758722E0CCFE00C0CCF4 /* tab_close_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0CCC758622E0CCFE00C0CCF4 /* tab_close_icon.png */; };
 		0CCC758C22E2028A00C0CCF4 /* NimbleStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CCC758922E2028900C0CCF4 /* NimbleStyle.swift */; };
 		0CCC758E22E2028A00C0CCF4 /* NimbleTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CCC758B22E2028A00C0CCF4 /* NimbleTheme.swift */; };
@@ -79,6 +80,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0C0D2B7B22E5E7000047C30F /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		0CCC758622E0CCFE00C0CCF4 /* tab_close_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tab_close_icon.png; sourceTree = "<group>"; };
 		0CCC758922E2028900C0CCF4 /* NimbleStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NimbleStyle.swift; path = KPCTabsControl/NimbleStyle.swift; sourceTree = "<group>"; };
 		0CCC758B22E2028A00C0CCF4 /* NimbleTheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NimbleTheme.swift; path = KPCTabsControl/NimbleTheme.swift; sourceTree = "<group>"; };
@@ -283,6 +285,7 @@
 		9FF789431D0FDA7A00F66AF2 /* KPCTabsControl */ = {
 			isa = PBXGroup;
 			children = (
+				0C0D2B7B22E5E7000047C30F /* Colors.xcassets */,
 				9F4081581D39387B00ADF6DB /* Protocols.swift */,
 				9F40815A1D3938E100ADF6DB /* TabsControl.swift */,
 				9F1186421D4CF89B00E6CE39 /* TabsControlCell.swift */,
@@ -428,6 +431,7 @@
 				9FA7EDD01AD66A250060FF79 /* KPCTabPlusTemplate.pdf in Resources */,
 				9FA7EDCF1AD66A250060FF79 /* KPCTabLeftTemplate.pdf in Resources */,
 				0CCC758722E0CCFE00C0CCF4 /* tab_close_icon.png in Resources */,
+				0C0D2B7C22E5E7000047C30F /* Colors.xcassets in Resources */,
 				9FA7EDD11AD66A250060FF79 /* KPCTabRightTemplate.pdf in Resources */,
 				9FA7EDCE1AD66A250060FF79 /* KPCPullDownTemplate.pdf in Resources */,
 			);
@@ -676,6 +680,7 @@
 				INFOPLIST_FILE = KPCTabsControl/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.onekiloparsec.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -701,6 +706,7 @@
 				INFOPLIST_FILE = KPCTabsControl/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.onekiloparsec.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

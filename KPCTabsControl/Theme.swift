@@ -52,3 +52,9 @@ extension Theme {
         }
     }
 }
+
+public extension Theme {
+     var closeButtonColor: NSColor {
+        return NSColor.textColor 
+    }
+}
