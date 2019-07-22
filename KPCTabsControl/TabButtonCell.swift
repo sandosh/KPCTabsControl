@@ -27,6 +27,10 @@ class TabButtonCell: NSButtonCell {
     var showsIcon: Bool {
         get { return (self.controlView as! TabButton).icon != nil }
     }
+    
+    var closeButtonSize: CGFloat {
+        get { return (self.controlView as! TabButton).closeButtonSize }
+    }
 
     var showsMenu: Bool {
         get { return self.menu?.items.count > 0 }
@@ -124,6 +128,10 @@ class TabButtonCell: NSButtonCell {
     override func titleRect(forBounds theRect: NSRect) -> NSRect {
         let title = self.style.attributedTitle(content: self.title, selectionState: self.selectionState)
         var rect = self.style.titleRect(title: title, inBounds: theRect, showingIcon: self.showsIcon)
+        rect = rect.offsetBy(dx: titleMargin*2, dy: 0).shrinkBy(dx: titleMargin*2, dy: 0)
+        if self.closeButtonSize != 0 {
+            rect.size.width -= closeButtonSize + 2*titleMargin
+        }
         if self.showsMenu {
             let popupRect = self.popupRectWithFrame(theRect)
             rect.size.width -= popupRect.width + 2*titleMargin

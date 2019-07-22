@@ -153,7 +153,8 @@ open class TabsControl: NSControl, NSTextDelegate {
                                    item: item,
                                    target: self,
                                    action: #selector(TabsControl.selectTab(_:)),
-                                   style: self.style)
+                                   style: self.style,
+                                   closeCallBack: closeTab(_:))
                 
                 button.wantsLayer = true
                 button.state = NSControl.StateValue.off
@@ -398,13 +399,10 @@ open class TabsControl: NSControl, NSTextDelegate {
             , button.isEnabled
             else { return }
         
-        self.selectedButton?.showCloseButton = false
         
         self.selectedButtonIndex = button.index
         self.invalidateRestorableState()
         
-        self.selectedButton?.showCloseButton = true
-        self.selectedButton?.closeTabCallBack = {self.closeTab($0)}
         if let action = self.action,
             let target = self.target {
             NSApp.sendAction(action, to: target, from: self)
