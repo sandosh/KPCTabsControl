@@ -154,7 +154,7 @@ open class TabsControl: NSControl, NSTextDelegate {
                                    target: self,
                                    action: #selector(TabsControl.selectTab(_:)),
                                    style: self.style,
-                                   closeCallBack: closeTab(_:))
+                                   closeCallBack: closeTab(_:_:))
                 
                 button.wantsLayer = true
                 button.state = NSControl.StateValue.off
@@ -387,11 +387,27 @@ open class TabsControl: NSControl, NSTextDelegate {
     
     // MARK: - Selection
     
-    func closeTab(_ item: AnyObject?){
+    func closeTab(_ sender: AnyObject?, _ item: AnyObject?){
+        guard let button = sender as? TabButton
+            , button.isEnabled
+            else { return }
+        
         NotificationCenter.default.post(name: Notification.Name(rawValue: TabsControlTabWillCloseNotification), object: self)
         self.delegate?.tabsControlWillCloseTab?(self, item: item!)
+        
+        button.removeFromSuperview()
+        
+        NotificationCenter.default.post(name: Notification.Name(rawValue: TabsControlTabDidCloseNotification), object: self)
+        let items = tabButtons.map({ return $0.representedObject! })
+        self.delegate?.tabsControlDidCloseTab?(self, items: items)
+        
         self.reloadTabs()
-        self.selectTab(self.tabButtons.first)
+        
+        if self.selectedButtonIndex == button.index{
+            self.selectTab(self.tabButtons.first)
+        } else if self.selectedButtonIndex > button.index{
+            self.selectTab(tabButtons[self.selectedButtonIndex! - 1])
+        }
     }
 
     @objc fileprivate func selectTab(_ sender: AnyObject?) {

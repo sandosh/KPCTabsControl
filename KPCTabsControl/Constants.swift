@@ -14,6 +14,9 @@ public let TabsControlSelectionDidChangeNotification = "TabsControlSelectionDidC
 /// The name of the notification upon the tab was closed.
 public let TabsControlTabWillCloseNotification = "TabsControlTabWillCloseNotification"
 
+/// The name of the notification upon the tab was closed.
+public let TabsControlTabDidCloseNotification = "TabsControlTabDidCloseNotification"
+
 /**
  The position of a tab button inside the control. Used in the Style.
  
