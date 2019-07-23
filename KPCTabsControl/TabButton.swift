@@ -211,7 +211,10 @@ open class TabButton: NSButton {
 
         guard let tabButtonCell = self.tabButtonCell
             else { assertionFailure("TabButtonCell expected in drawRect(_:)"); return }
-
+        let path = Bundle(for: TabButton.self).pathForImageResource("tab_close_icon")!
+        let img = NSImage(contentsOfFile: path)?.imageWithTint((style as! ThemedStyle).theme.closeButtonColor)
+        closeButton?.image = img
+        closeButton?.imageScaling = .scaleProportionallyDown
         let iconFrames = self.style.iconFrames(tabRect: self.frame)
         self.iconView?.frame = iconFrames.iconFrame
         self.alternativeTitleIconView?.frame = iconFrames.alternativeTitleIconFrame
