@@ -262,15 +262,30 @@ open class TabButton: NSButton {
             return
         }
         self.closeButton = NSButton()
+        self.closeButton!.cell = CloseButtonCell()
         self.closeButton?.isBordered = false
         self.addSubview(closeButton!)
         closeButton?.translatesAutoresizingMaskIntoConstraints = false
-        closeButton?.topAnchor.constraint(equalTo: self.topAnchor, constant: 5).isActive = true
-        closeButton?.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -5).isActive = true
-        closeButton?.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -3).isActive = true
+        closeButton?.topAnchor.constraint(equalTo: self.topAnchor, constant: 0).isActive = true
+        closeButton?.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0).isActive = true
+        closeButton?.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 0).isActive = true
         closeButton?.heightAnchor.constraint(equalTo: closeButton!.widthAnchor, multiplier: 1).isActive = true
         closeButton?.target = self
         closeTabCallBack = callBack
         closeButton?.action = #selector(closeButtonPressed)
     }
+}
+
+
+class CloseButtonCell: NSButtonCell {
+  
+  override var backgroundColor: NSColor? {
+    get { return .clear }
+    set {}
+  }
+  
+  override func drawImage(_ image: NSImage, withFrame frame: NSRect, in controlView: NSView) {
+    super.drawImage(image, withFrame: frame.insetBy(dx: 5, dy: 5), in: controlView)
+  }
+  
 }
