@@ -427,7 +427,10 @@ open class TabsControl: NSControl, NSTextDelegate {
         NotificationCenter.default.post(name: Notification.Name(rawValue: TabsControlSelectionDidChangeNotification), object: self)
         self.delegate?.tabsControlDidChangeSelection?(self, item: button.representedObject!)
 
-        guard let currentEvent = NSApp.currentEvent else { return }
+        guard let currentEvent = NSApp.currentEvent,
+          self.convert(button.frame, to: .none).contains(currentEvent.locationInWindow) else {
+            return
+        }
 
         if currentEvent.type == .leftMouseDown && currentEvent.clickCount > 1 {
             self.editTabButton(button)
