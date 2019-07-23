@@ -16,34 +16,23 @@ public struct NimbleTheme: Theme {
     public let selectedTabButtonTheme: TabButtonTheme = SelectedTabButtonTheme(base: DefaultTabButtonTheme())
     public let unselectableTabButtonTheme: TabButtonTheme = UnselectableTabButtonTheme(base: DefaultTabButtonTheme())
     public let tabsControlTheme: TabsControlTheme = DefaultTabsControlTheme()
-    
-    fileprivate static var sharedBorderColor: NSColor { if #available(OSX 10.14, *) {
-        return NSColor.separatorColor
-    } else {
-        return NSColor.lightGray
-        } }
-    fileprivate static var sharedBackgroundColor: NSColor { return NSColor.windowBackgroundColor }
+  fileprivate static var sharedBorderColor: NSColor { return getColorFromAsset("BorderColor", defualt: NSColor.separatorColor)}
+  
+    fileprivate static var sharedBackgroundColor: NSColor { return getColorFromAsset("BackgroundColor", defualt: NSColor.windowBackgroundColor) }
     
     fileprivate struct DefaultTabButtonTheme: KPCTabsControl.TabButtonTheme {
         var backgroundColor: NSColor { return NimbleTheme.sharedBackgroundColor }
         var borderColor: NSColor { return NimbleTheme.sharedBorderColor }
-        var titleColor: NSColor { return NSColor.textColor }
+        var titleColor: NSColor { return getColorFromAsset("TextColor", defualt: NSColor.selectedTextColor) }
         var titleFont: NSFont { return NSFont.systemFont(ofSize: 12) }
     }
     
     fileprivate struct SelectedTabButtonTheme: KPCTabsControl.TabButtonTheme {
         let base: DefaultTabButtonTheme
         
-        var backgroundColor: NSColor {
-            if #available(OSX 10.13, *) {
-                return NSColor.init(named: "SelectedBackgroundColor", bundle: Bundle.init(for: TabsControl.self)) ?? NSColor.white
-            } else {
-                return NSColor.white
-            }
-            
-        }
+        var backgroundColor: NSColor { return getColorFromAsset("SelectedBackgroundColor", defualt: NSColor.white)}
         var borderColor: NSColor { return NimbleTheme.sharedBorderColor }
-        var titleColor: NSColor { return NSColor.selectedTextColor  }
+        var titleColor: NSColor { return getColorFromAsset("SelectedTextColor", defualt: NSColor.selectedTextColor)  }
         var titleFont: NSFont { return NSFont.systemFont(ofSize: 12) }
     }
     
@@ -60,4 +49,8 @@ public struct NimbleTheme: Theme {
         var backgroundColor: NSColor { return NimbleTheme.sharedBackgroundColor }
         var borderColor: NSColor { return NimbleTheme.sharedBorderColor }
     }
+}
+
+fileprivate func getColorFromAsset(_ name: String, defualt: NSColor) -> NSColor {
+   return NSColor.init(named: name, bundle: Bundle.init(for: TabsControl.self)) ?? defualt
 }
