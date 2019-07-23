@@ -33,10 +33,6 @@ class TabsControlCell: NSCell {
     }
     
     override func draw(withFrame cellFrame: NSRect, in controlView: NSView) {
-
-        // TODO can we get rid of this by setting `style` earlier?
-        guard self.style != nil else { return }
-
-        self.style.drawTabsControlBezel(frame: cellFrame)
+        //we don't draw anything before add new tab
     }
 }
