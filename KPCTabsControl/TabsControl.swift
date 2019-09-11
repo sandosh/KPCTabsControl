@@ -77,13 +77,17 @@ open class TabsControl: NSControl, NSTextDelegate {
         self.scrollView.usesPredominantAxisScrolling = true
         self.scrollView.horizontalScrollElasticity = .allowed
         self.scrollView.verticalScrollElasticity = .none
-        self.scrollView.autoresizingMask = [NSView.AutoresizingMask.width, NSView.AutoresizingMask.height]
-        self.scrollView.translatesAutoresizingMaskIntoConstraints = true
-        
-        self.tabsView = NSView(frame: self.scrollView.bounds)
-        self.scrollView.documentView = self.tabsView
-        
+      
+        self.scrollView.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(self.scrollView)
+        self.scrollView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+        self.scrollView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        self.scrollView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+        self.scrollView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+      
+        self.tabsView = NSView(frame: self.scrollView.bounds)
+        self.tabsView.autoresizingMask = [NSView.AutoresizingMask.height]
+        self.scrollView.documentView = self.tabsView
         
         if self.hideScrollButtons == false {
             self.scrollLeftButton = NSButton.auxiliaryButton(withImageNamed: "KPCTabLeftTemplate",
