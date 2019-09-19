@@ -45,7 +45,7 @@ open class TabsControl: NSControl, NSTextDelegate {
     open var style: Style = DefaultStyle() {
         didSet {
             self.tabsControlCell.style = self.style
-            self.tabButtons.forEach { $0.style = self.style }
+            self.tabButtons.filter{!($0 is СustomizableTabItem)}.forEach { $0.style = self.style }
             self.updateTabs()
         }
     }
@@ -150,14 +150,14 @@ open class TabsControl: NSControl, NSTextDelegate {
         var tabButtons = self.tabButtons
         for i in 0..<newItemsCount {
             let item = dataSource.tabsControl(self, itemAtIndex: i)
-            
+            let style = getStyle(for: item)
             var button : TabButton
             if i >= oldItemsCount {
                 button = TabButton(index: i,
                                    item: item,
                                    target: self,
                                    action: #selector(TabsControl.selectTab(_:)),
-                                   style: self.style,
+                                   style: style,
                                    closeCallBack: closeTab(_:_:))
                 
                 button.wantsLayer = true
@@ -173,7 +173,7 @@ open class TabsControl: NSControl, NSTextDelegate {
             
             button.editable = self.delegate?.tabsControl?(self, canEditTitleOfItem: item) == true
             button.buttonPosition = TabPosition.fromIndex(i, totalCount: newItemsCount)
-            button.style = self.style
+            button.style = style
 
             button.title = dataSource.tabsControl(self, titleForItem: item)
             button.icon = dataSource.tabsControl?(self, iconForItem: item)
@@ -188,6 +188,13 @@ open class TabsControl: NSControl, NSTextDelegate {
     
     // MARK: - Layout
 
+    fileprivate func getStyle(for item: Any) -> Style {
+      guard let customItem = item as? СustomizableTabItem, let style = customItem.tabStyle else {
+        return self.style
+      }
+      return style
+    }
+  
     fileprivate func updateTabs(animated: Bool = false) {
         self.layoutTabButtons(nil, animated: animated)
         self.updateAuxiliaryButtons()
@@ -211,8 +218,8 @@ open class TabsControl: NSControl, NSTextDelegate {
 
         var buttonX = CGFloat(0)
         for (index, button) in tabButtons.enumerated() {
-            
-            let offset = self.style.tabButtonOffset(position: button.buttonPosition)
+            let style = getStyle(for: button.item!)
+            let offset = style.tabButtonOffset(position: button.buttonPosition)
             let buttonFrame = CGRect(x: buttonX + offset.x, y: offset.y, width: buttonWidth, height: buttonHeight)
             buttonX += buttonWidth + offset.x
 
