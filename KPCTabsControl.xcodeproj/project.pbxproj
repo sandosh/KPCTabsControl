@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0C0D2B7C22E5E7000047C30F /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0C0D2B7B22E5E7000047C30F /* Colors.xcassets */; };
+		0C17C8C723336FB20075FD4A /* СustomizableTabItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C17C8C623336FB20075FD4A /* СustomizableTabItem.swift */; };
 		0CCC758722E0CCFE00C0CCF4 /* tab_close_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0CCC758622E0CCFE00C0CCF4 /* tab_close_icon.png */; };
 		0CCC758C22E2028A00C0CCF4 /* NimbleStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CCC758922E2028900C0CCF4 /* NimbleStyle.swift */; };
 		0CCC758E22E2028A00C0CCF4 /* NimbleTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CCC758B22E2028A00C0CCF4 /* NimbleTheme.swift */; };
@@ -81,6 +82,7 @@
 
 /* Begin PBXFileReference section */
 		0C0D2B7B22E5E7000047C30F /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		0C17C8C623336FB20075FD4A /* СustomizableTabItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "СustomizableTabItem.swift"; sourceTree = "<group>"; };
 		0CCC758622E0CCFE00C0CCF4 /* tab_close_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tab_close_icon.png; sourceTree = "<group>"; };
 		0CCC758922E2028900C0CCF4 /* NimbleStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NimbleStyle.swift; path = KPCTabsControl/NimbleStyle.swift; sourceTree = "<group>"; };
 		0CCC758B22E2028A00C0CCF4 /* NimbleTheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NimbleTheme.swift; path = KPCTabsControl/NimbleTheme.swift; sourceTree = "<group>"; };
@@ -166,6 +168,7 @@
 		501FD7751D5B29EF00C3B1F3 /* Styles & Themes */ = {
 			isa = PBXGroup;
 			children = (
+				0C17C8C623336FB20075FD4A /* СustomizableTabItem.swift */,
 				501FD7761D5B2A0100C3B1F3 /* Style.swift */,
 				9F4946B31D5F87440061C5B7 /* Theme.swift */,
 				50BF2D6E1D5F0986006A54F5 /* Default */,
@@ -472,6 +475,7 @@
 				501FD7791D5B2CA300C3B1F3 /* DefaultTheme.swift in Sources */,
 				50BF2D711D5F09A8006A54F5 /* ChromeStyle.swift in Sources */,
 				0CCC758C22E2028A00C0CCF4 /* NimbleStyle.swift in Sources */,
+				0C17C8C723336FB20075FD4A /* СustomizableTabItem.swift in Sources */,
 				9F76CEE51D560DB500D817F7 /* Error.swift in Sources */,
 				9F23FF321D10A99D00326F3B /* TabButtonCell.swift in Sources */,
 				9F0505551D717D05003D542B /* SafariStyle.swift in Sources */,
