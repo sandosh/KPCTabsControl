@@ -404,7 +404,9 @@ open class TabsControl: NSControl, NSTextDelegate {
             else { return }
         
         NotificationCenter.default.post(name: Notification.Name(rawValue: TabsControlTabWillCloseNotification), object: self)
-        self.delegate?.tabsControlWillCloseTab?(self, item: item!)
+      guard self.delegate?.tabsControlWillCloseTab?(self, item: item!) ?? false else {
+        return
+      }
         
         button.removeFromSuperview()
         
