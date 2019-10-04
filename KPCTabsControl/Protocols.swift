@@ -99,7 +99,7 @@ import AppKit
      *  - parameter tabControl: The instance of the tabs control.
      *  - parameter item:       The item representing the selected tab.
      */
-    @objc optional func tabsControlWillCloseTab(_ control: TabsControl, item: AnyObject)
+    @objc optional func tabsControlWillCloseTab(_ control: TabsControl, item: AnyObject) -> Bool
     
     /**
      *  If implemented, the delegate is informed that the tab did closed.
