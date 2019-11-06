@@ -444,8 +444,12 @@ open class TabsControl: NSControl, NSTextDelegate {
           self.convert(button.frame, to: .none).contains(currentEvent.locationInWindow) else {
             return
         }
-
-        if currentEvent.type == .leftMouseDown && currentEvent.clickCount > 1 {
+      
+      
+      if currentEvent.type == .leftMouseUp {
+        return
+      }
+       else if currentEvent.type == .leftMouseDown && currentEvent.clickCount > 1 {
             self.editTabButton(button)
         }
         else if let item = button.representedObject
