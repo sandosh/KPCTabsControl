@@ -146,8 +146,7 @@ open class TabsControl: NSControl, NSTextDelegate {
         if newItemsCount < oldItemsCount {
             self.tabButtons.filter({ $0.index >= newItemsCount }).forEach({ $0.removeFromSuperview() })
         }
-        
-        var tabButtons = self.tabButtons
+                
         for i in 0..<newItemsCount {
             let item = dataSource.tabsControl(self, itemAtIndex: i)
             let style = getStyle(for: item)
@@ -158,7 +157,7 @@ open class TabsControl: NSControl, NSTextDelegate {
                                    target: self,
                                    action: #selector(TabsControl.selectTab(_:)),
                                    style: style,
-                                   closeCallBack: closeTab(_:_:))
+                                   closeCallBack: {[weak self] in self?.closeTab($0, $1)} )
                 
                 button.wantsLayer = true
                 button.state = NSControl.StateValue.off
