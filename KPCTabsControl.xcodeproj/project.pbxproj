@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		0C0D2B7C22E5E7000047C30F /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0C0D2B7B22E5E7000047C30F /* Colors.xcassets */; };
 		0C17C8C723336FB20075FD4A /* СustomizableTabItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C17C8C623336FB20075FD4A /* СustomizableTabItem.swift */; };
-		0CCC758722E0CCFE00C0CCF4 /* tab_close_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0CCC758622E0CCFE00C0CCF4 /* tab_close_icon.png */; };
 		0CCC758C22E2028A00C0CCF4 /* NimbleStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CCC758922E2028900C0CCF4 /* NimbleStyle.swift */; };
 		0CCC758E22E2028A00C0CCF4 /* NimbleTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CCC758B22E2028A00C0CCF4 /* NimbleTheme.swift */; };
 		5004722A1D5350120095FCCB /* SequenceType+TabsControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500472291D5350120095FCCB /* SequenceType+TabsControl.swift */; };
@@ -42,7 +41,6 @@
 /* Begin PBXFileReference section */
 		0C0D2B7B22E5E7000047C30F /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		0C17C8C623336FB20075FD4A /* СustomizableTabItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "СustomizableTabItem.swift"; sourceTree = "<group>"; };
-		0CCC758622E0CCFE00C0CCF4 /* tab_close_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tab_close_icon.png; sourceTree = "<group>"; };
 		0CCC758922E2028900C0CCF4 /* NimbleStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NimbleStyle.swift; path = KPCTabsControl/NimbleStyle.swift; sourceTree = "<group>"; };
 		0CCC758B22E2028A00C0CCF4 /* NimbleTheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NimbleTheme.swift; path = KPCTabsControl/NimbleTheme.swift; sourceTree = "<group>"; };
 		500472291D5350120095FCCB /* SequenceType+TabsControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "SequenceType+TabsControl.swift"; path = "KPCTabsControl/SequenceType+TabsControl.swift"; sourceTree = "<group>"; };
@@ -169,7 +167,6 @@
 		9F3C2E2C1A0181A900281F4B /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				0CCC758622E0CCFE00C0CCF4 /* tab_close_icon.png */,
 				9F3C2E351A0182DF00281F4B /* KPCPullDownTemplate.pdf */,
 				9F3C2E361A0182DF00281F4B /* KPCTabLeftTemplate.pdf */,
 				9F3C2E371A0182DF00281F4B /* KPCTabPlusTemplate.pdf */,
@@ -283,7 +280,6 @@
 			files = (
 				9FA7EDD01AD66A250060FF79 /* KPCTabPlusTemplate.pdf in Resources */,
 				9FA7EDCF1AD66A250060FF79 /* KPCTabLeftTemplate.pdf in Resources */,
-				0CCC758722E0CCFE00C0CCF4 /* tab_close_icon.png in Resources */,
 				0C0D2B7C22E5E7000047C30F /* Colors.xcassets in Resources */,
 				9FA7EDD11AD66A250060FF79 /* KPCTabRightTemplate.pdf in Resources */,
 				9FA7EDCE1AD66A250060FF79 /* KPCPullDownTemplate.pdf in Resources */,

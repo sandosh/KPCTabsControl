@@ -27,10 +27,9 @@ open class TabButton: NSButton {
     open var style: Style! {
         didSet {
             self.tabButtonCell?.style = self.style
-            let path = Bundle(for: TabButton.self).pathForImageResource("tab_close_icon")!
-            let img = NSImage(contentsOfFile: path)?.imageWithTint((style as! ThemedStyle).theme.closeButtonColor)
+            let img = NSImage(named: NSImage.stopProgressTemplateName)?.imageWithTint(.textColor)
             closeButton?.image = img
-            closeButton?.imageScaling = .scaleProportionallyDown
+            closeButton?.imageScaling = .scaleProportionallyUpOrDown
         }
     }
 
@@ -211,10 +210,10 @@ open class TabButton: NSButton {
 
         guard let tabButtonCell = self.tabButtonCell
             else { assertionFailure("TabButtonCell expected in drawRect(_:)"); return }
-        let path = Bundle(for: TabButton.self).pathForImageResource("tab_close_icon")!
-        let img = NSImage(contentsOfFile: path)?.imageWithTint((style as! ThemedStyle).theme.closeButtonColor)
+
+        let img =  NSImage(named: NSImage.stopProgressTemplateName)?.imageWithTint(.textColor)
         closeButton?.image = img
-        closeButton?.imageScaling = .scaleProportionallyDown
+        closeButton?.imageScaling = .scaleProportionallyUpOrDown
         let iconFrames = self.style.iconFrames(tabRect: self.frame)
         self.iconView?.frame = iconFrames.iconFrame
         self.alternativeTitleIconView?.frame = iconFrames.alternativeTitleIconFrame
@@ -285,7 +284,7 @@ class CloseButtonCell: NSButtonCell {
   }
   
   override func drawImage(_ image: NSImage, withFrame frame: NSRect, in controlView: NSView) {
-    super.drawImage(image, withFrame: frame.insetBy(dx: 5, dy: 5), in: controlView)
+    super.drawImage(image, withFrame: frame.insetBy(dx: 8, dy: 8), in: controlView)
   }
   
 }
