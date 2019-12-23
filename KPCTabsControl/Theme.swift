@@ -58,3 +58,8 @@ public extension Theme {
         return NSColor.textColor 
     }
 }
+
+public protocol GradientTabButtonTheme {
+  var topBackgroundColor : NSColor { get }
+  var bottomBackgroundColor : NSColor { get }
+}

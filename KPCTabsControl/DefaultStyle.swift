@@ -92,6 +92,7 @@ extension ThemedStyle {
 
     public func drawTabsControlBezel(frame: NSRect) {
         self.theme.tabsControlTheme.backgroundColor.setFill()
+        
         frame.fill()
         
         let borderDrawing = BorderDrawing.fromMask(frame, borderMask: self.tabsControlBorderMask())
@@ -101,9 +102,13 @@ extension ThemedStyle {
     public func drawTabButtonBezel(frame: NSRect, position: TabPosition, isSelected: Bool) {
         
         let activeTheme = isSelected ? self.theme.selectedTabButtonTheme : self.theme.tabButtonTheme
-        activeTheme.backgroundColor.setFill()
-        frame.fill()
-        
+        if let gradTheme = activeTheme as? GradientTabButtonTheme {
+          let gradient = NSGradient(colors: [gradTheme.topBackgroundColor, gradTheme.bottomBackgroundColor])
+          gradient?.draw(in: frame, angle: 90.0)
+        } else {
+          activeTheme.backgroundColor.setFill()
+          frame.fill()
+        }
         let borderDrawing = BorderDrawing.fromMask(frame, borderMask: self.tabButtonBorderMask(position))
         self.drawBorder(borderDrawing, color: activeTheme.borderColor)
     }
