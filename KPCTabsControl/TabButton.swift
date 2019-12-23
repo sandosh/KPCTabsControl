@@ -267,7 +267,7 @@ open class TabButton: NSButton {
         closeButton?.translatesAutoresizingMaskIntoConstraints = false
         closeButton?.topAnchor.constraint(equalTo: self.topAnchor, constant: 0).isActive = true
         closeButton?.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0).isActive = true
-        closeButton?.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 0).isActive = true
+        closeButton?.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 0).isActive = true
         closeButton?.heightAnchor.constraint(equalTo: closeButton!.widthAnchor, multiplier: 1).isActive = true
         closeButton?.target = self
         closeTabCallBack = callBack
