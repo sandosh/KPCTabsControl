@@ -18,7 +18,9 @@ public typealias TitleEditorSettings = (textColor: NSColor, font: NSFont, alignm
 public protocol Style {
     // Tab Buttons
     var tabButtonWidth: TabWidth { get }
+    var tabButtonsMargin: (left: CGFloat, right: CGFloat) { get }
     func tabButtonOffset(position: TabPosition) -> Offset
+    func tabButtonOffset(index: Int, totalCount: Int) -> Offset
     func tabButtonBorderMask(_ position: TabPosition) -> BorderMask?
     
     // Tab Button Titles
@@ -36,6 +38,13 @@ public protocol Style {
     func drawTabsControlBezel(frame: NSRect)
 }
 
+public extension Style {
+    var tabButtonsMargin: (left: CGFloat, right: CGFloat) { (0.0, 0.0)}
+    func tabButtonOffset(index: Int, totalCount: Int) -> Offset {
+        return tabButtonOffset(position: TabPosition.fromIndex(index, totalCount: totalCount))
+    }
+}
+
 /**
  *  The default Style protocol doesn't necessary have a theme associated with it, for custom styles.
  *  However, provided styles (Numbers.app-like, Safari and Chrome) have an associated theme.
@@ -43,3 +52,6 @@ public protocol Style {
 public protocol ThemedStyle : Style {
     var theme: Theme { get }
 }
+
+
+

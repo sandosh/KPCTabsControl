@@ -39,17 +39,26 @@ open class TabsControl: NSControl, NSTextDelegate {
         get { return self.delegateInterceptor.receiver as? TabsControlDelegate }
         set { self.delegateInterceptor.receiver = newValue as? NSObject }
     }
+  
+    public var numberOfButtons: Int {
+        return dataSource?.tabsControlNumberOfTabs(self) ?? 0
+    }
     
     // MARK: - Styling
 
     open var style: Style = DefaultStyle() {
         didSet {
             self.tabsControlCell.style = self.style
-            self.tabButtons.filter{!($0 is СustomizableTabItem)}.forEach { $0.style = self.style }
+            //self.tabButtons.filter{!($0 is СustomizableTabItem)}.forEach { $0.style = self.style }
             self.updateTabs()
         }
     }
-
+        
+    public func setTabsBackgroundColor(_ color: NSColor) {
+      self.tabsView.wantsLayer = true
+      self.tabsView.layer?.backgroundColor = color.cgColor
+    }
+  
     // MARK: - Initializers & Setup
     
     public required init?(coder: NSCoder) {
@@ -188,9 +197,8 @@ open class TabsControl: NSControl, NSTextDelegate {
     // MARK: - Layout
 
     fileprivate func getStyle(for item: Any) -> Style {
-      guard let customItem = item as? СustomizableTabItem, let style = customItem.tabStyle else {
-        return self.style
-      }
+      guard let customItem = item as? СustomizableTabItem,
+            let style = customItem.tabStyle else { return self.style }
       return style
     }
   
@@ -215,11 +223,12 @@ open class TabsControl: NSControl, NSTextDelegate {
             buttonWidth = max(minWidth, min(maxWidth, fullWidth))
         }
 
-        var buttonX = CGFloat(0)
+        var buttonX = self.style.tabButtonsMargin.left
         for (index, button) in tabButtons.enumerated() {
             let style = getStyle(for: button.item!)
-            let offset = style.tabButtonOffset(position: button.buttonPosition)
+            let offset = style.tabButtonOffset(index: index, totalCount: tabButtons.count)
             let buttonFrame = CGRect(x: buttonX + offset.x, y: offset.y, width: buttonWidth, height: buttonHeight)
+            
             buttonX += buttonWidth + offset.x
 
             button.layer?.zPosition = button.state == NSControl.StateValue.on ? CGFloat(Float.greatestFiniteMagnitude) : CGFloat(index)
@@ -234,9 +243,11 @@ open class TabsControl: NSControl, NSTextDelegate {
                 button.isEnabled = selectable
             }
 
-            tabsViewWidth += buttonWidth
+            tabsViewWidth += buttonWidth + offset.x
         }
-
+          
+        tabsViewWidth += self.style.tabButtonsMargin.left + self.style.tabButtonsMargin.right
+      
         let viewFrame = CGRect(x: 0.0, y: 0.0, width: tabsViewWidth, height: buttonHeight)
         if animated {
             self.tabsView.animator().frame = viewFrame
@@ -461,8 +472,8 @@ open class TabsControl: NSControl, NSTextDelegate {
         guard let index = self.selectedButtonIndex else { return nil }
         return self.tabButtons.findFirst({ $0.index == index })
     }
-
-    var selectedButtonIndex: Int? = nil {
+      
+    public private(set) var selectedButtonIndex: Int? = nil {
         didSet {
             self.scrollToSelectedButton()
             
