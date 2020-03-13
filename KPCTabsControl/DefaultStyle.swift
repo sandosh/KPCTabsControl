@@ -171,7 +171,9 @@ public struct DefaultStyle: ThemedStyle {
     public let tabButtonWidth: TabWidth
     public let tabsControlRecommendedHeight: CGFloat = 24.0
 
-    public init(theme: Theme = DefaultTheme(), tabButtonWidth: TabWidth = .flexible(min: 50, max: 150)) {
+    public init(theme: Theme = DefaultTheme(),
+                tabButtonWidth: TabWidth = .flexible(min: 50, max: 150),
+                tabButtonsMargin: (CGFloat, CGFloat) = (0.0, 0.0)) {
         self.theme = theme
         self.tabButtonWidth = tabButtonWidth
     }

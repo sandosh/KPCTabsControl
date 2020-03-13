@@ -7,10 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0C0D2B7C22E5E7000047C30F /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0C0D2B7B22E5E7000047C30F /* Colors.xcassets */; };
 		0C17C8C723336FB20075FD4A /* СustomizableTabItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C17C8C623336FB20075FD4A /* СustomizableTabItem.swift */; };
-		0CCC758C22E2028A00C0CCF4 /* NimbleStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CCC758922E2028900C0CCF4 /* NimbleStyle.swift */; };
-		0CCC758E22E2028A00C0CCF4 /* NimbleTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CCC758B22E2028A00C0CCF4 /* NimbleTheme.swift */; };
 		5004722A1D5350120095FCCB /* SequenceType+TabsControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500472291D5350120095FCCB /* SequenceType+TabsControl.swift */; };
 		501FD7771D5B2A0100C3B1F3 /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501FD7761D5B2A0100C3B1F3 /* Style.swift */; };
 		501FD7791D5B2CA300C3B1F3 /* DefaultTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501FD7781D5B2CA300C3B1F3 /* DefaultTheme.swift */; };
@@ -80,10 +77,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		0C0D2B7B22E5E7000047C30F /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		0C17C8C623336FB20075FD4A /* СustomizableTabItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "СustomizableTabItem.swift"; sourceTree = "<group>"; };
-		0CCC758922E2028900C0CCF4 /* NimbleStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NimbleStyle.swift; path = KPCTabsControl/NimbleStyle.swift; sourceTree = "<group>"; };
-		0CCC758B22E2028A00C0CCF4 /* NimbleTheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NimbleTheme.swift; path = KPCTabsControl/NimbleTheme.swift; sourceTree = "<group>"; };
 		500472291D5350120095FCCB /* SequenceType+TabsControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "SequenceType+TabsControl.swift"; path = "KPCTabsControl/SequenceType+TabsControl.swift"; sourceTree = "<group>"; };
 		501FD7761D5B2A0100C3B1F3 /* Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Style.swift; path = KPCTabsControl/Style.swift; sourceTree = "<group>"; };
 		501FD7781D5B2CA300C3B1F3 /* DefaultTheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DefaultTheme.swift; path = KPCTabsControl/DefaultTheme.swift; sourceTree = "<group>"; };
@@ -113,7 +107,7 @@
 		9F4946B21D5F87440061C5B7 /* DefaultStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DefaultStyle.swift; path = KPCTabsControl/DefaultStyle.swift; sourceTree = "<group>"; };
 		9F4946B31D5F87440061C5B7 /* Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Theme.swift; path = KPCTabsControl/Theme.swift; sourceTree = "<group>"; };
 		9F4946B61D6058440061C5B7 /* ChromeTheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChromeTheme.swift; path = KPCTabsControl/ChromeTheme.swift; sourceTree = "<group>"; };
-		9F53676D1D38F4A6001C5D54 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = KPCTabsControl/Constants.swift; sourceTree = "<group>"; };
+		9F53676D1D38F4A6001C5D54 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = KPCTabsControl/Constants.swift; sourceTree = "<group>"; tabWidth = 4; };
 		9F6E61DC1D4F6E9B004167F1 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		9F76CEE31D560DB500D817F7 /* Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Error.swift; path = KPCTabsControl/Error.swift; sourceTree = "<group>"; };
 		9F91D2F21D7B2F1500261A5B /* Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Helpers.swift; path = KPCTabsControl/Helpers.swift; sourceTree = "<group>"; };
@@ -154,24 +148,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0CCC758822E2021E00C0CCF4 /* Nimble */ = {
-			isa = PBXGroup;
-			children = (
-				0CCC758922E2028900C0CCF4 /* NimbleStyle.swift */,
-				0CCC758B22E2028A00C0CCF4 /* NimbleTheme.swift */,
-			);
-			name = Nimble;
-			sourceTree = "<group>";
-		};
 		501FD7751D5B29EF00C3B1F3 /* Styles & Themes */ = {
 			isa = PBXGroup;
 			children = (
-				0C17C8C623336FB20075FD4A /* СustomizableTabItem.swift */,
 				501FD7761D5B2A0100C3B1F3 /* Style.swift */,
 				9F4946B31D5F87440061C5B7 /* Theme.swift */,
-				50BF2D6E1D5F0986006A54F5 /* Default */,
+				0C17C8C623336FB20075FD4A /* СustomizableTabItem.swift */,
 				50BF2D6F1D5F0992006A54F5 /* Chrome */,
-				0CCC758822E2021E00C0CCF4 /* Nimble */,
+				50BF2D6E1D5F0986006A54F5 /* Default */,
 				9F0505511D717A13003D542B /* Safari */,
 			);
 			name = "Styles & Themes";
@@ -285,7 +269,6 @@
 		9FF789431D0FDA7A00F66AF2 /* KPCTabsControl */ = {
 			isa = PBXGroup;
 			children = (
-				0C0D2B7B22E5E7000047C30F /* Colors.xcassets */,
 				9F4081581D39387B00ADF6DB /* Protocols.swift */,
 				9F40815A1D3938E100ADF6DB /* TabsControl.swift */,
 				9F1186421D4CF89B00E6CE39 /* TabsControlCell.swift */,
@@ -430,7 +413,6 @@
 			files = (
 				9FA7EDD01AD66A250060FF79 /* KPCTabPlusTemplate.pdf in Resources */,
 				9FA7EDCF1AD66A250060FF79 /* KPCTabLeftTemplate.pdf in Resources */,
-				0C0D2B7C22E5E7000047C30F /* Colors.xcassets in Resources */,
 				9FA7EDD11AD66A250060FF79 /* KPCTabRightTemplate.pdf in Resources */,
 				9FA7EDCE1AD66A250060FF79 /* KPCPullDownTemplate.pdf in Resources */,
 			);
@@ -466,11 +448,9 @@
 				9F40815B1D3938E100ADF6DB /* TabsControl.swift in Sources */,
 				9F4081591D39387B00ADF6DB /* Protocols.swift in Sources */,
 				9F4081571D38F63D00ADF6DB /* Constants.swift in Sources */,
-				0CCC758E22E2028A00C0CCF4 /* NimbleTheme.swift in Sources */,
 				501FD7771D5B2A0100C3B1F3 /* Style.swift in Sources */,
 				501FD7791D5B2CA300C3B1F3 /* DefaultTheme.swift in Sources */,
 				50BF2D711D5F09A8006A54F5 /* ChromeStyle.swift in Sources */,
-				0CCC758C22E2028A00C0CCF4 /* NimbleStyle.swift in Sources */,
 				0C17C8C723336FB20075FD4A /* СustomizableTabItem.swift in Sources */,
 				9F76CEE51D560DB500D817F7 /* Error.swift in Sources */,
 				9F23FF321D10A99D00326F3B /* TabButtonCell.swift in Sources */,
