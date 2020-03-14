@@ -27,9 +27,6 @@ open class TabButton: NSButton {
     open var style: Style! {
         didSet {
             self.tabButtonCell?.style = self.style
-            let img = NSImage(named: NSImage.stopProgressTemplateName)?.imageWithTint(.textColor)
-            closeButton?.image = img
-            closeButton?.imageScaling = .scaleProportionallyUpOrDown
         }
     }
 
@@ -164,10 +161,11 @@ open class TabButton: NSButton {
         let item: AnyObject? = self.cell?.representedObject as AnyObject?
         
         let userInfo: [String: AnyObject]? = (item != nil) ? ["item": item!] : nil
+        let opts: NSTrackingArea.Options = [.inVisibleRect, .activeInActiveApp, .mouseEnteredAndExited]
         self.trackingArea = NSTrackingArea(rect: self.bounds,
-                                           options: [NSTrackingArea.Options.mouseEnteredAndExited, NSTrackingArea.Options.activeInActiveApp, NSTrackingArea.Options.inVisibleRect],
-                                           owner: self, userInfo: userInfo)
-        
+                                           options: opts,
+                                           owner: self,
+                                           userInfo: userInfo)
         self.addTrackingArea(self.trackingArea!)
         
         if let w = self.window, let e = NSApp.currentEvent {
@@ -186,11 +184,13 @@ open class TabButton: NSButton {
     }
     
     open override func mouseEntered(with theEvent: NSEvent) {
+        closeButton?.isHidden = false
         super.mouseEntered(with: theEvent)
         self.needsDisplay = true
     }
     
     open override func mouseExited(with theEvent: NSEvent) {
+        closeButton?.isHidden = true
         super.mouseExited(with: theEvent)
         self.needsDisplay = true
     }
@@ -210,10 +210,7 @@ open class TabButton: NSButton {
 
         guard let tabButtonCell = self.tabButtonCell
             else { assertionFailure("TabButtonCell expected in drawRect(_:)"); return }
-
-        let img =  NSImage(named: NSImage.stopProgressTemplateName)?.imageWithTint(.textColor)
-        closeButton?.image = img
-        closeButton?.imageScaling = .scaleProportionallyUpOrDown
+        
         let iconFrames = self.style.iconFrames(tabRect: self.frame)
         self.iconView?.frame = iconFrames.iconFrame
         self.alternativeTitleIconView?.frame = iconFrames.alternativeTitleIconFrame
@@ -257,34 +254,65 @@ open class TabButton: NSButton {
     }
     
     func createCloseButton(closeCallBack : ((AnyObject?, AnyObject?) -> Void)?) {
-        guard let callBack = closeCallBack else {
-            return
-        }
-        self.closeButton = NSButton()
-        self.closeButton!.cell = CloseButtonCell()
-        self.closeButton?.isBordered = false
-        self.addSubview(closeButton!)
-        closeButton?.translatesAutoresizingMaskIntoConstraints = false
-        closeButton?.topAnchor.constraint(equalTo: self.topAnchor, constant: 0).isActive = true
-        closeButton?.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0).isActive = true
-        closeButton?.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 0).isActive = true
-        closeButton?.heightAnchor.constraint(equalTo: closeButton!.widthAnchor, multiplier: 1).isActive = true
-        closeButton?.target = self
+        guard let callBack = closeCallBack else { return }
         closeTabCallBack = callBack
+        
+        let cell = CloseButtonCell()
+        cell.highlightsBy = .changeBackgroundCellMask
+        cell.backgroundColor = tabButtonCell?.backgroundColor
+        
+        closeButton = CloseButton()
+        closeButton?.cell = cell
+        closeButton?.isBordered = false
+                    
+        closeButton?.wantsLayer = true
+        closeButton?.layer?.cornerRadius = 2
+        closeButton?.layer?.masksToBounds = true
+
+        closeButton?.target = self
         closeButton?.action = #selector(closeButtonPressed)
+        
+        let img = NSImage(named: NSImage.stopProgressTemplateName)?.imageWithTint(.textColor)
+        closeButton?.image = img
+        closeButton?.imageScaling = .scaleProportionallyDown// .scaleProportionallyUpOrDown
+        
+        self.addSubview(closeButton!)
+        
+        closeButton?.translatesAutoresizingMaskIntoConstraints = false
+        closeButton?.topAnchor.constraint(equalTo: self.topAnchor, constant: 4).isActive = true
+        closeButton?.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -4).isActive = true
+        closeButton?.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 4).isActive = true
+        closeButton?.heightAnchor.constraint(equalTo: closeButton!.widthAnchor, multiplier: 1).isActive = true
     }
 }
 
 
+class CloseButton: NSButton {
+    var trackingArea: NSTrackingArea? = nil
+            
+    override func updateTrackingAreas() {
+        if let ta = trackingArea {
+            self.removeTrackingArea(ta)
+        }
+                        
+        trackingArea = NSTrackingArea(rect: self.bounds,
+                                      options: [.mouseEnteredAndExited, .activeAlways],
+                                      owner: self)
+        
+        self.addTrackingArea(trackingArea!)
+    }
+    
+    open override func mouseEntered(with theEvent: NSEvent) {
+        cell?.isHighlighted = true
+    }
+    
+    open override func mouseExited(with event: NSEvent) {
+        cell?.isHighlighted = false
+    }
+}
+
 class CloseButtonCell: NSButtonCell {
-  
-  override var backgroundColor: NSColor? {
-    get { return .clear }
-    set {}
-  }
-  
   override func drawImage(_ image: NSImage, withFrame frame: NSRect, in controlView: NSView) {
-    super.drawImage(image, withFrame: frame.insetBy(dx: 8, dy: 8), in: controlView)
+    super.drawImage(image, withFrame: frame.insetBy(dx: 1, dy: 1), in: controlView)
   }
-  
 }
