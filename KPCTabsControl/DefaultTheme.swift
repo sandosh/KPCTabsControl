@@ -55,10 +55,21 @@ public struct DefaultTheme: Theme {
     }
 }
 
-extension NSColor {
-    func darkerColor() -> NSColor {
-        var h: CGFloat = 0, s: CGFloat = 0, b: CGFloat = 0, a: CGFloat = 0
-        self.getHue(&h, saturation: &s, brightness: &b, alpha: &a)
-        return NSColor(calibratedHue: h, saturation: s, brightness: max(b - 0.2, 0.0), alpha: a)
-    }
+public extension NSColor {
+  func darkerColor(by value: CGFloat = 0.1) -> NSColor {
+    var h: CGFloat = 0, s: CGFloat = 0, b: CGFloat = 0, a: CGFloat = 0
+    self.getHue(&h, saturation: &s, brightness: &b, alpha: &a)
+    return NSColor(calibratedHue: h, saturation: s, brightness: max(b - value, 0.0), alpha: a)
+  }
+  
+  func lighterColor(by value: CGFloat = 0.1) -> NSColor {
+    var h: CGFloat = 0, s: CGFloat = 0, b: CGFloat = 0, a: CGFloat = 0
+    self.getHue(&h, saturation: &s, brightness: &b, alpha: &a)
+    return NSColor(calibratedHue: h, saturation: s, brightness: min(b + value, 1.0), alpha: a)
+  }
+  
+  internal var isDark: Bool {
+    let rgb = cgColor.components!
+    return (0.299 * rgb[0] + 0.587 * rgb[1] + 0.114 * rgb[2]) < 0.5
+  }
 }

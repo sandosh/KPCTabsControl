@@ -27,11 +27,14 @@ extension ThemedStyle {
         return BorderMask.all()
     }
     
+    public func tabButtonBackgroundColor(isSelected: Bool) -> NSColor {
+        return isSelected ? self.theme.selectedTabButtonTheme.backgroundColor : self.theme.tabButtonTheme.backgroundColor
+    }
+  
     // MARK: - Tab Button Titles
 
     public func iconFrames(tabRect rect: NSRect) -> IconFrames {
-        
-        let verticalPadding: CGFloat = 4.0
+        let verticalPadding: CGFloat = 5.0
         let paddedHeight = rect.height - 2*verticalPadding
         let x = rect.width / 2.0 - paddedHeight / 2.0
         
@@ -51,7 +54,6 @@ extension ThemedStyle {
     }
     
     fileprivate func paddedRectForIcon(_ rect: NSRect, showingIcon: Bool) -> NSRect {
-        
         guard showingIcon else {
             return rect
         }
@@ -106,7 +108,7 @@ extension ThemedStyle {
           let gradient = NSGradient(colors: [gradTheme.topBackgroundColor, gradTheme.bottomBackgroundColor])
           gradient?.draw(in: frame, angle: 90.0)
         } else {
-          activeTheme.backgroundColor.setFill()
+          tabButtonBackgroundColor(isSelected: isSelected).setFill()
           frame.fill()
         }
         let borderDrawing = BorderDrawing.fromMask(frame, borderMask: self.tabButtonBorderMask(position))

@@ -22,7 +22,8 @@ public protocol Style {
     func tabButtonOffset(position: TabPosition) -> Offset
     func tabButtonOffset(index: Int, totalCount: Int) -> Offset
     func tabButtonBorderMask(_ position: TabPosition) -> BorderMask?
-    
+    func tabButtonBackgroundColor(isSelected: Bool) -> NSColor
+  
     // Tab Button Titles
     func iconFrames(tabRect rect: NSRect) -> IconFrames
     func titleRect(title: NSAttributedString, inBounds rect: NSRect, showingIcon: Bool) -> NSRect
@@ -52,6 +53,4 @@ public extension Style {
 public protocol ThemedStyle : Style {
     var theme: Theme { get }
 }
-
-
 

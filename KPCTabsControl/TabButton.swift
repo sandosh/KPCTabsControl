@@ -13,7 +13,7 @@ open class TabButton: NSButton {
     fileprivate var iconView: NSImageView?
     fileprivate var alternativeTitleIconView: NSImageView?
     fileprivate var trackingArea: NSTrackingArea?
-    fileprivate var closeButton: NSButton?
+    fileprivate var closeButton: CloseButton?
     
     fileprivate var tabButtonCell: TabButtonCell? {
         get { return self.cell as? TabButtonCell }
@@ -207,12 +207,18 @@ open class TabButton: NSButton {
     }
     
     open override func draw(_ dirtyRect: NSRect) {
-
-        guard let tabButtonCell = self.tabButtonCell
-            else { assertionFailure("TabButtonCell expected in drawRect(_:)"); return }
-        
+        guard let tabButtonCell = self.tabButtonCell else {
+            assertionFailure("TabButtonCell expected in drawRect(_:)"); return
+        }
+                        
         let iconFrames = self.style.iconFrames(tabRect: self.frame)
-        self.iconView?.frame = iconFrames.iconFrame
+        let titleRect = self.tabButtonCell!.titleRect(forBounds: self.bounds)
+        let titleX = titleRect.origin.x + (titleRect.width - self.tabButtonCell!.requiredMinimumWidth) / 2.0
+        
+        var iconFrame = iconFrames.iconFrame
+        iconFrame.origin.x = titleX - iconFrame.width
+        
+        self.iconView?.frame = iconFrame
         self.alternativeTitleIconView?.frame = iconFrames.alternativeTitleIconFrame
 
         let scale: CGFloat = (self.layer != nil) ? self.layer!.contentsScale : 1.0
@@ -256,13 +262,10 @@ open class TabButton: NSButton {
     func createCloseButton(closeCallBack : ((AnyObject?, AnyObject?) -> Void)?) {
         guard let callBack = closeCallBack else { return }
         closeTabCallBack = callBack
-        
-        let cell = CloseButtonCell()
-        cell.highlightsBy = .changeBackgroundCellMask
-        cell.backgroundColor = tabButtonCell?.backgroundColor
-        
+                
         closeButton = CloseButton()
-        closeButton?.cell = cell
+        closeButton?.cell = CloseButtonCell()
+        closeButton?.tabButton = self
         closeButton?.isBordered = false
                     
         closeButton?.wantsLayer = true
@@ -288,26 +291,32 @@ open class TabButton: NSButton {
 
 
 class CloseButton: NSButton {
+    weak var tabButton: TabButton!
     var trackingArea: NSTrackingArea? = nil
-            
+    
+    private var highlightColor: NSColor {
+        let selected = tabButton.state == NSControl.StateValue.on
+        let color = tabButton.style.tabButtonBackgroundColor(isSelected: selected)
+        return color.isDark ? color.lighterColor() : color.darkerColor()
+    }
+    
     override func updateTrackingAreas() {
         if let ta = trackingArea {
             self.removeTrackingArea(ta)
         }
-                        
-        trackingArea = NSTrackingArea(rect: self.bounds,
-                                      options: [.mouseEnteredAndExited, .activeAlways],
-                                      owner: self)
+        
+        let opts: NSTrackingArea.Options = [.mouseEnteredAndExited, .activeAlways]
+        trackingArea = NSTrackingArea(rect: self.bounds, options: opts, owner: self)
         
         self.addTrackingArea(trackingArea!)
     }
-    
+            
     open override func mouseEntered(with theEvent: NSEvent) {
-        cell?.isHighlighted = true
+        (cell as? NSButtonCell)?.backgroundColor = highlightColor
     }
     
     open override func mouseExited(with event: NSEvent) {
-        cell?.isHighlighted = false
+        (cell as? NSButtonCell)?.backgroundColor = .clear
     }
 }
 

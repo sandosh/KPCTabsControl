@@ -40,6 +40,12 @@ class TabButtonCell: NSButtonCell {
         didSet { self.controlView?.needsDisplay = true }
     }
 
+    
+    var requiredMinimumWidth: CGFloat {
+        let title = self.style.attributedTitle(content: self.title, selectionState: self.selectionState)
+        return title.size().width + 2.0*titleMargin
+    }
+  
     var style: Style!
 
     // MARK: - Initializers & Copy
@@ -78,10 +84,8 @@ class TabButtonCell: NSButtonCell {
     }
 
     func hasRoomToDrawFullTitle(inRect rect: NSRect) -> Bool {
-        let title = self.style.attributedTitle(content: self.title, selectionState: self.selectionState)
-        let requiredMinimumWidth = title.size().width + 2.0*titleMargin
         let titleDrawRect = self.titleRect(forBounds: rect)
-        return requiredMinimumWidth <= NSWidth(titleDrawRect)
+        return self.requiredMinimumWidth <= NSWidth(titleDrawRect)
     }
 
     override func cellSize(forBounds aRect: NSRect) -> NSSize {
