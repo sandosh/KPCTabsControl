@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0C17C8C723336FB20075FD4A /* СustomizableTabItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C17C8C623336FB20075FD4A /* СustomizableTabItem.swift */; };
+		0C17C8C723336FB20075FD4A /* CustomizableTabItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C17C8C623336FB20075FD4A /* CustomizableTabItem.swift */; };
 		5004722A1D5350120095FCCB /* SequenceType+TabsControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500472291D5350120095FCCB /* SequenceType+TabsControl.swift */; };
 		501FD7771D5B2A0100C3B1F3 /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501FD7761D5B2A0100C3B1F3 /* Style.swift */; };
 		501FD7791D5B2CA300C3B1F3 /* DefaultTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501FD7781D5B2CA300C3B1F3 /* DefaultTheme.swift */; };
@@ -77,7 +77,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		0C17C8C623336FB20075FD4A /* СustomizableTabItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "СustomizableTabItem.swift"; sourceTree = "<group>"; };
+		0C17C8C623336FB20075FD4A /* CustomizableTabItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CustomizableTabItem.swift; path = KPCTabsControl/CustomizableTabItem.swift; sourceTree = "<group>"; };
 		500472291D5350120095FCCB /* SequenceType+TabsControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "SequenceType+TabsControl.swift"; path = "KPCTabsControl/SequenceType+TabsControl.swift"; sourceTree = "<group>"; };
 		501FD7761D5B2A0100C3B1F3 /* Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Style.swift; path = KPCTabsControl/Style.swift; sourceTree = "<group>"; };
 		501FD7781D5B2CA300C3B1F3 /* DefaultTheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DefaultTheme.swift; path = KPCTabsControl/DefaultTheme.swift; sourceTree = "<group>"; };
@@ -153,7 +153,7 @@
 			children = (
 				501FD7761D5B2A0100C3B1F3 /* Style.swift */,
 				9F4946B31D5F87440061C5B7 /* Theme.swift */,
-				0C17C8C623336FB20075FD4A /* СustomizableTabItem.swift */,
+				0C17C8C623336FB20075FD4A /* CustomizableTabItem.swift */,
 				50BF2D6F1D5F0992006A54F5 /* Chrome */,
 				50BF2D6E1D5F0986006A54F5 /* Default */,
 				9F0505511D717A13003D542B /* Safari */,
@@ -451,7 +451,7 @@
 				501FD7771D5B2A0100C3B1F3 /* Style.swift in Sources */,
 				501FD7791D5B2CA300C3B1F3 /* DefaultTheme.swift in Sources */,
 				50BF2D711D5F09A8006A54F5 /* ChromeStyle.swift in Sources */,
-				0C17C8C723336FB20075FD4A /* СustomizableTabItem.swift in Sources */,
+				0C17C8C723336FB20075FD4A /* CustomizableTabItem.swift in Sources */,
 				9F76CEE51D560DB500D817F7 /* Error.swift in Sources */,
 				9F23FF321D10A99D00326F3B /* TabButtonCell.swift in Sources */,
 				9F0505551D717D05003D542B /* SafariStyle.swift in Sources */,
@@ -549,11 +549,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -597,11 +597,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
